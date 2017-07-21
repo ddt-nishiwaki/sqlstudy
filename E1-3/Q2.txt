@@ -1,0 +1,38 @@
+問２：
+
+  アクセス記録テーブル(access_log)からリンク元URLを重複のない形で取り出してみましょう。
+
+
+  (①)
+    referer
+  (②)
+    access_log
+  ;
+
+  
+回答：
+
+  ①：SELECT DISTINCT
+  ②：FROM
+
+
+結果：
+
+  SELECT DISTINCT
+    referer
+  FROM
+    access_log
+  ;
+
+  +---------------------------+
+  | referer                   |
+  +---------------------------+
+  | http://wings.msn.to/hamu/ |
+  | http://wings.msn.to/neko/ |
+  | http://wings.msn.to/inu/  |
+  | http://wings.msn.to/saru/ |
+  | http://wings.msn.to/tori/ |
+  | http://wings.msn.to/kame/ |
+  | NULL                      |
+  +---------------------------+
+
