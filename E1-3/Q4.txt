@@ -1,0 +1,41 @@
+問４：
+
+  以下は、社員テーブル(employee)から重複無しの役職を取り出すためのSQL命令ですが、2点誤りがあります。誤りを指摘してください。
+
+  SELECT ALL
+    class,
+    depart_id
+  FROM
+    employee
+  ;
+
+
+回答：
+
+  SELECT ALL      <-- 重複を外す場合は ALL ではなく DISTINCT
+    class,
+    depart_id     <-- 取り出すフィールドは class のみ
+
+  FROM
+    employee
+  ;
+
+
+結果：
+
+  SELECT DISTINCT
+    class
+  FROM
+    employee
+  ;
+
+  +--------------------+
+  | class              |
+  +--------------------+
+  | 部長               |
+  | 担当               |
+  | 主任               |
+  | アシスタント       |
+  | 課長               |
+  +--------------------+ 
+
