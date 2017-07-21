@@ -1,0 +1,35 @@
+問１：
+
+  アンケート回答テーブル(quest)から都道府県名を重複のない形で取り出してみましょう。
+
+  SELECT (①)
+    prefecture
+  FROM
+    (②)
+  ;
+
+回答：
+
+  ①：DISTINCT
+  ②：quest
+
+
+結果：
+
+  SELECT DISTINCT
+    prefecture
+  FROM
+    quest
+  ;
+
+  +--------------+
+  | prefecture   |
+  +--------------+
+  | 東京都       |
+  | 神奈川県     |
+  | 茨城県       |
+  | 千葉県       |
+  | 埼玉県       |
+  +--------------+
+
+
