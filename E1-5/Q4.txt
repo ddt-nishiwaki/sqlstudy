@@ -1,0 +1,37 @@
+問４：
+
+  社員テーブル(employee)から氏(カナ)が「ア」で始まる社員の情報だけを取り出してみましょう。
+  取り出す列は、l_name, f_name列とします。
+
+  ※穴埋めではない
+
+
+回答：
+
+  SELECT
+    l_name,
+    f_name
+  FROM
+    employee
+  WHERE
+    l_name_kana LIKE 'ア%'
+  ;
+
+
+結果：
+
+  SELECT
+    l_name,
+    f_name
+  FROM
+    employee
+  WHERE
+    l_name_kana LIKE 'ア%'
+  ;
+
+  +--------+--------+
+  | l_name | f_name |
+  +--------+--------+
+  | 相沢   | 聡     |
+  +--------+--------+
+
