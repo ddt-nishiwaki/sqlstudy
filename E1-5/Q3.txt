@@ -1,0 +1,40 @@
+問３：
+
+  書籍情報テーブル(books)から署名が「SQL〇〇」である書籍の情報を取り出してみましょう。
+  取り出す列は、 isbn, title, price列とします。
+
+  ※穴埋めではない
+
+
+回答：
+
+  SELECT
+    isbn,
+    title,
+    price
+  FROM
+    books
+  WHERE
+    title LIKE 'SQL__'
+  ;
+
+
+結果：
+
+  
+  SELECT
+    isbn,
+    title,
+    price
+  FROM
+    books
+  WHERE
+    title LIKE 'SQL__'
+  ;
+
+  +---------------+-----------+-------+
+  | isbn          | title     | price |
+  +---------------+-----------+-------+
+  | 4-0010-0000-9 | SQL入門   |  5500 |
+  +---------------+-----------+-------+
+
