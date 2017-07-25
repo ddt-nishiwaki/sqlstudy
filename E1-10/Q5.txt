@@ -1,0 +1,60 @@
+問５：
+
+  以下は、アンケート回答テーブル(quest)から都道府県,性別ごとの評価平均を求めるためのSQL命令ですが、2点誤りがあります。
+  誤りを指摘してください。
+
+  SELECT
+    prefecture,
+    sex,
+    age,
+    AVG(answer1) IS 評価平均
+  FROM
+    quest
+  GROUP BY
+    prefecture,
+    sex
+  ;
+
+
+回答：
+
+  SELECT
+    prefecture,
+    sex,
+    age,        <--- 年齢フィールドは必要ない
+    AVG(answer1) IS 評価平均  <--- IS ではなく AS
+  FROM
+    quest
+  GROUP BY
+    prefecture,
+    sex
+  ;
+
+
+結果：
+
+  SELECT
+    prefecture,
+    sex,
+    AVG(answer1) AS 評価平均
+  FROM
+    quest
+  GROUP BY
+    prefecture,
+    sex
+  ;
+
+  +--------------+-----+--------------+
+  | prefecture   | sex | 評価平均     |
+  +--------------+-----+--------------+
+  | 茨城県       | 女  |       1.0000 |
+  | 茨城県       | 男  |       2.5000 |
+  | 埼玉県       | 男  |       3.0000 |
+  | 神奈川県     | 女  |       2.0000 |
+  | 神奈川県     | 男  |       2.5000 |
+  | 千葉県       | 女  |       3.0000 |
+  | 千葉県       | 男  |       3.0000 |
+  | 東京都       | 女  |       3.0000 |
+  | 東京都       | 男  |       1.6000 |
+  +--------------+-----+--------------+
+
