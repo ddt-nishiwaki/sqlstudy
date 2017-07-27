@@ -1,0 +1,40 @@
+問３：
+
+  著者ー書籍テーブル(author_books)で、著者毎の書籍数を求め、登録数が3冊以上の情報だけを取り出してみましょう。
+
+  ※穴埋めではない
+
+
+解答：
+
+  SELECT
+    author_id,
+    COUNT(*)
+  FROM
+    author_books
+  GROUP BY
+    author_id
+  HAVING
+    COUNT(isbn) >= 3
+  ;
+
+
+結果：
+
+  SELECT                -- 以下のカラムを出力します
+    author_id,          -- 著者IDフィールド
+    COUNT(*)         -- 
+  FROM                  -- 以下のテーブルから抽出します
+    author_books
+  GROUP BY              -- 以下のカラムでグルーピングを指定します
+    author_id
+  HAVING                -- 以下条件で絞り込みを行います
+    COUNT(isbn) >= 3
+  ;
+
+  +-----------+-------------+
+  | author_id | COUNT(isbn) |
+  +-----------+-------------+
+  | Y0002     |           4 |
+  +-----------+-------------+
+
