@@ -1,0 +1,57 @@
+問５：
+
+  以下は、社員テーブル(employee)から所属部署毎の女性の人数を求め、3人以上の部署だけを出力するためのSQL命令ですが、2つ誤りがあります。
+  誤りを指摘してください
+
+  SELECT
+    depart_id,
+    COUNT(*)
+  FROM
+    emproyee
+  WHERE
+    sex=2
+  ORDER BY
+    depart_id
+  WHERE
+    COUNT( * ) >=3
+  ;
+
+
+解答：
+
+  SELECT
+    depart_id,
+    COUNT(*)
+  FROM
+    employee
+  WHERE
+    sex=2
+  ORDER BY              -- 部署毎の出力なので、ORDER BY ではなく GROUP BY
+    depart_id
+  WHERE                 -- フィールドの値ではないので WHERE ではなく HAVING
+    COUNT( * ) >=3
+  ;
+
+
+結果：
+
+  SELECT                      -- 以下のテーブルフィールドを抽出します
+    depart_id,                -- 所属部署フィールド
+    COUNT(*)                  -- 人数をカウントするカラム
+  FROM                        -- 以下のテーブルから抽出します
+    employee                  -- 社員テーブル
+  WHERE                       -- 以下の値を持つフィールドで絞り込みます
+    sex=2                     -- 性別が女性
+  GROUP BY                    -- 以下のフィールドでグルーピングします
+    depart_id                 -- 所属部署テーブル
+  HAVING                      -- 以下の条件で絞り込みます
+    COUNT( * ) >=3            -- 人数が3人以上
+  ;
+
+  +-----------+----------+
+  | depart_id | COUNT(*) |
+  +-----------+----------+
+  | S01       |        4 |
+  | S02       |        5 |
+  +-----------+----------+
+
