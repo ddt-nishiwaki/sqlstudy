@@ -1,0 +1,64 @@
+問３：
+
+  アクセス記録テーブル(access_log)からリンク元ごとのアクセス数を求め、
+  10件未満を「C」,
+  10件以上50件未満を「B」,
+  50件以上を「A」
+  とする「ランク」列を取得して見ましょう。
+  また、データはアクセス数が3件以上のものを多い順に並べるものとします。
+
+  ※穴埋め問題ではない
+
+
+解答：
+
+  SELECT
+    referer,
+    COUNT(*) AS  アクセス数,
+    CASE
+      WHEN COUNT(*) >= 50 THEN 'A'
+      WHEN COUNT(*) BETWEEN 10 AND 49 THEN 'B'
+      ELSE 'C'
+    END AS ランク
+  FROM
+    access_log
+  GROUP BY
+    referer
+  HAVING
+    COUNT(*) >= 3
+  ORDER BY
+    COUNT(*) DESC
+  ;
+
+
+結果：
+
+  SELECT                                           -- アクセス数のランクを見るために以下のカラムを指定する
+    referer,                                       -- 対象のリンク元URLを見るためにrefererフィールドを指定する
+    COUNT(*) AS アクセス数,                        -- ランク付けするためにアクセス数を数えるカラムを指定する 
+    CASE                                           -- アクセス数に対するランクを振り分ける
+      WHEN COUNT(*) >= 50 THEN 'A'                 -- ランクAの条件を設定する
+      WHEN COUNT(*) BETWEEN 10 AND 49 THEN 'B'     -- ランクBの条件を設定する
+      ELSE 'C'                                     -- ランクCの条件を設定する
+    END AS ランク                                  -- 以上の振り分け設定を「ランク」カラムとして指定する
+  FROM                                             -- アクセス数のランクを取得するために次のテーブルを指定する
+    access_log                                     -- アクセス記録テーブルを指定する
+  GROUP BY                                         -- リンク元URLごとのデータを見るために次のフィールドでグルーピングする
+    referer                                        -- refererフィールドを指定する
+  HAVING                                           -- 出力結果を一定数以上のアクセスで絞る
+    COUNT(*) >= 3                                  -- アクセスが3以上のデータに絞る
+  ORDER BY                                         -- 情報を見やすくするために次の条件でソートする
+    COUNT(*) DESC                                  -- アクセス数の多い順にソートする
+  ;
+
+  +---------------------------+-----------------+-----------+
+  | referer                   | アクセス数      | ランク    |
+  +---------------------------+-----------------+-----------+
+  | http://wings.msn.to/hamu/ |             100 | A         |
+  | http://wings.msn.to/neko/ |              11 | B         |
+  | http://wings.msn.to/saru/ |               4 | C         |
+  | http://wings.msn.to/inu/  |               3 | C         |
+  | http://wings.msn.to/tori/ |               3 | C         |
+  | http://wings.msn.to/kame/ |               3 | C         |
+  +---------------------------+-----------------+-----------+
+
