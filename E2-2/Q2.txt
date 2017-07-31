@@ -1,0 +1,49 @@
+問２：
+
+  社員テーブル(employee)と
+  所属テーブル(depart)を結合し、
+  所属社員が一人もいない「幽霊」部署を洗い出して見ましょう。
+  以下の空欄を埋めて、SQL命令を完成させてください。
+
+  SELECT
+    d.depart_id,
+    d.depart_name
+  FROM
+    depart AS d
+  (①)
+    employee AS e
+  ON
+    (②)
+  WHERE
+    (③)
+  ;
+
+
+回答：
+
+  ①： LEFT JOIN
+  ②： d.depart_id = e.depart_id
+  ③： e.depart_id IS NULL
+
+
+結果：
+
+  SELECT                         -- 所属社員が一人もいない「幽霊」部署を洗い出すために以下のカラムを出力する
+    d.depart_id,                 -- 部署IDを示すカラムを設定する
+    d.depart_name                -- 役職名を示すカラムを設定する
+  FROM                           -- 部署名を取得するために以下テーブルを設定する
+    depart AS d                  -- 所属テーブルを設定する
+  LEFT JOIN                      -- 従業員のデータを所属テーブルの情報をベースに取得する
+    employee AS e                -- 従業員テーブルを設定する
+  ON                             -- テーブルを結合するために以下条件を設定する
+    d.depart_id = e.depart_id    -- 部署IDが同じデータを関連づける
+  WHERE                          -- 所属社員がいない「幽霊」部署を以下条件で抽出する
+    e.depart_id IS NULL          -- employeeテーブルに存在しない部署で絞り込む
+  ;
+
+  +-----------+-----------------+
+  | depart_id | depart_name     |
+  +-----------+-----------------+
+  | E02       | 第二営業部      |
+  +-----------+-----------------+
+
