@@ -1,0 +1,93 @@
+問３：
+
+  注文書テーブル(order_main)と注文明細テーブル(order_desc)、ユーザーテーブル(usr)、商品テーブル(product)、を結合し、
+  未納の注文について、
+  発注日、注文コード、商品コード昇順に注文情報を出力して見ましょう。
+  出力列の別名は、
+  発注日、注文コード、利用者氏名、商品名、商品単価、購入数とします。
+
+  注文書テーブル(order_main)と注文明細テーブル(order_desc)、ユーザーテーブル(usr)、商品テーブル(product)、を結合し、
+  未納の注文について、--- delivery_date がNULLのもの
+  発注日、注文コード、商品コード昇順に注文情報を出力して見ましょう。
+  出力列の別名は、
+  発注日、注文コード、利用者氏名、商品名、商品単価、購入数とします。
+
+  ※穴埋め問題ではない
+
+
+回答：
+
+  SELECT
+    order_main.order_date AS 発注日,
+    order_main.po_id AS 注文コード,
+    CONCAT(usr.l_name, f_name) AS 利用者氏名,
+    product.price AS 商品単価
+  FROM
+    (
+        ( 
+            order_main
+          LEFT JOIN 
+            order_desc
+          ON
+            order_main.po_id = order_desc.po_id
+        )
+      INNER JOIN -- 商品テーブルと結合する
+        product
+      ON
+        order_desc.p_id = product.p_id
+    )
+  INNER JOIN
+    usr
+  ON
+    usr.user_id = order_main.user_id
+  WHERE
+    order_main.delivery_date IS NULL
+  ORDER BY
+    order_main.order_date,
+    order_main.po_id,
+    product.p_id ASC
+  ;
+
+
+
+  
+結果：
+
+  SELECT                                           -- 未納商品の詳細情報をみるために以下カラムを出力する
+    order_main.order_date AS 発注日,               -- 発注日カラムを設定する
+    order_main.po_id AS 注文コード,                -- 注文コードカラムを設定する
+    CONCAT(usr.l_name, f_name) AS 利用者氏名,      -- 利用者氏名カラムを設定する
+    product.price AS 商品単価                      -- 商品単価カラムを設定する
+  FROM                                             -- 以下より必要な情報をもつテーブルを結合して抽出する
+    (
+        ( 
+            order_main                             -- 注文書テーブルに注文明細を結合していく
+          LEFT JOIN                                -- 未納の注文(NULL)の情報が欲しいため外部結合とする
+            order_desc                             -- 注文明細テーブルを結合する
+          ON                                       -- 以下条件で結合する
+            order_main.po_id = order_desc.po_id    -- 注文コードの一致するレコードで結合する
+        )
+      INNER JOIN                                   -- さらに商品コードと商品名を関連づけるために以下テーブルを結合する
+        product                                    -- 商品テーブル
+      ON                                           -- 以下条件で結合する
+        order_desc.p_id = product.p_id             -- 商品コードが一致するレコードで結合する
+    )
+  INNER JOIN                                       -- 最後にユーザー名を関連づけるために以下テーブルを結合する
+    usr                                            -- ユーザーテーブルを結合する
+  ON                                               -- 以下条件で結合する
+    usr.user_id = order_main.user_id               -- ユーザーIDが一致するレコードで結合する
+  WHERE                                            -- 未納の注文を取得するため以下の条件で結果を絞る
+    order_main.delivery_date IS NULL               -- 納品日情報がないデータで出力を絞る
+  ORDER BY                                         -- 見やすくするために以下の内容でソートする
+    order_main.order_date ASC,                     -- 発注日で昇順ソートする
+    order_main.po_id ASC,                          -- 注文コードで昇順ソートする
+    product.p_id ASC                               -- 商品コードで昇順ソートする
+  ;
+
+  +------------+-----------------+-----------------+--------------+
+  | 発注日     | 注文コード      | 利用者氏名      | 商品単価     |
+  +------------+-----------------+-----------------+--------------+
+  | 2012-12-22 |              19 | 森本絵里        |          100 |
+  | 2012-12-25 |              20 | 西島文子        |          600 |
+  +------------+-----------------+-----------------+--------------+
+
