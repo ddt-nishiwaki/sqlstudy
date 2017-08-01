@@ -7,7 +7,46 @@
 回答：
 
   SELECT
-    CONCAT(usr.l_name,usr.f_name) AS ユーザーの氏名
+    CONCAT(l_name,f_name) AS ユーザーの氏名
   FROM
     usr
+  WHERE
+    NOT EXISTS
+      (
+      SELECT
+        *
+      FROM
+        rental
+      WHERE
+        usr.user_id = rental.user_id
+      )
   ;
+
+
+結果：
+
+  SELECT
+    CONCAT(l_name,f_name) AS ユーザーの氏名
+  FROM
+    usr
+  WHERE
+    NOT EXISTS
+      (
+      SELECT
+        *
+      FROM
+        rental
+      WHERE
+        usr.user_id = rental.user_id
+      )
+  ;
+
+  +-----------------------+
+  | ユーザーの氏名        |
+  +-----------------------+
+  | 久保田守              |
+  | 児玉毅                |
+  | 矢口亜由美            |
+  | 村井佐知子            |
+  +-----------------------+
+
