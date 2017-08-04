@@ -1,0 +1,64 @@
+問２：
+
+  店舗テーブル(shop)から全ての店舗コードを抜き出し、
+  月間売上テーブル(sales)に対して挿入して見ましょう。
+  その際、売上対象年月には今月の日付(YYYY-MM)を、
+  売上高には 0 を固定値でセットするものとします。
+
+  ※穴埋め問題ではない
+
+
+回答：
+
+  INSERT INTO
+    sales
+    (
+    s_id,
+    s_date,
+    s_value
+    )
+  SELECT
+    s_id,
+    DATE_FORMAT(CURRENT_DATE,'%Y-%m'),
+    0
+  FROM
+    shop
+  ;
+
+
+結果：
+
+  INSERT INTO
+    sales
+    (
+    s_id,
+    s_date,
+    s_value
+    )
+  SELECT
+    s_id,
+    DATE_FORMAT(CURRENT_DATE,'%Y-%m'),
+    0
+  FROM
+    shop
+  ;
+
+  -- 挿入実行を確認するために以下クエリーを発行する(実行日 2017/8/4)
+  SELECT
+    *
+  FROM
+    sales
+  WHERE
+    s_date = '2017-08'
+  ;
+
+  +-------+---------+---------+
+  | s_id  | s_date  | s_value |
+  +-------+---------+---------+
+  | H0001 | 2017-08 |       0 |
+  | K0001 | 2017-08 |       0 |
+  | K0002 | 2017-08 |       0 |
+  | M0001 | 2017-08 |       0 |
+  | M0002 | 2017-08 |       0 |
+  +-------+---------+---------+
+
