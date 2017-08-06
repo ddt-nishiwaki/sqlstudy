@@ -1,0 +1,50 @@
+問２：
+
+  社員テーブル(employee)上、
+  社員の氏・名定義をいずれも
+  「VARCHAR(50) NULLを許可しない」に変更して見ましょう。
+  以下の空欄を埋めてSQL命令を完成させてください。
+
+  ALTER TABLE
+    (①)
+  (②)
+    l_name VARCHAR(50) NOT NULL,
+  (③)
+  ;
+
+
+回答：
+
+  ①：employee
+  ②：MODIFY
+  ③：MODIFY
+       f_name VARCHAR(50) NOT NULL
+
+
+結果：
+
+  ALTER TABLE                      -- 社員テーブルの既存定義を変更します
+    employee                       -- 変更するためにテーブルを指定します
+  MODIFY                           -- 定義を変更します
+    l_name VARCHAR(50) NOT NULL,   -- 氏フィールドを変更します
+  MODIFY                           -- 定義を変更します
+    f_name VARCHAR(50) NOT NULL    -- 名フィールドを変更します
+  ;
+
+  +-------------+--------------+------+-----+---------+-------+
+  | Field       | Type         | Null | Key | Default | Extra |
+  +-------------+--------------+------+-----+---------+-------+
+  | s_id        | char(7)      | NO   | PRI |         |       |
+  | l_name      | varchar(50)  | NO   |     | NULL    |       |
+  | f_name      | varchar(50)  | NO   |     | NULL    |       |
+  | l_name_kana | varchar(100) | YES  |     | NULL    |       |
+  | f_name_kana | varchar(100) | YES  |     | NULL    |       |
+  | sex         | smallint(6)  | YES  |     | NULL    |       |
+  | class       | varchar(20)  | YES  |     | NULL    |       |
+  | depart_id   | char(3)      | YES  |     | NULL    |       |
+  | email       | varchar(255) | NO   |     | NULL    |       |
+  | b_id        | char(7)      | YES  |     | NULL    |       |
+  | last_update | date         | YES  |     | NULL    |       |
+  | retired     | smallint(6)  | YES  |     | NULL    |       |
+  +-------------+--------------+------+-----+---------+-------+
+

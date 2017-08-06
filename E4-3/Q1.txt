@@ -1,0 +1,52 @@
+問１：
+
+  書籍情報テーブル(books)に対して、
+  pages列(INT型、デフォルト値は0)、
+  rating列(CHAR(1)型l、デフォルト値は'B')を
+  新たに追加して見ましょう。
+  追加先は、テーブル定義の一番最後とします。
+  空欄を埋めて、SQL命令を完成させてください。
+
+  (①)
+    books
+  ADD
+    (②)
+  ADD
+    rating CHAR(1) DEFAULT 'B' NOT NULL
+  AFTER
+    (③)
+  ;
+
+
+回答：
+
+  ①：ALTER TABLE
+  ②：pages INT DEFAULT 0 NOT NULL
+  ③：category_id
+
+
+結果：
+
+  ALTER TABLE                            -- テーブルの定義を変更するために以下テーブルを指定します
+    books                                -- 書籍情報テーブルを変更します
+  ADD                                    -- 以下定義を追加します
+    pages INT DEFAULT 0 NOT NULL,        -- ページフィールドを追加します
+  ADD                                    -- 以下定義を追加します
+    rating CHAR(1) DEFAULT 'B' NOT NULL  -- レートフィールドを追加します
+  AFTER                                  -- フィールドを追加するための位置を指定します
+    category_id                          -- カテゴリーID列の後ろに追加します
+  ;
+
+  +--------------+--------------+------+-----+---------+-------+
+  | Field        | Type         | Null | Key | Default | Extra |
+  +--------------+--------------+------+-----+---------+-------+
+  | isbn         | char(17)     | NO   | PRI |         |       |
+  | title        | varchar(255) | YES  |     | NULL    |       |
+  | price        | int(11)      | YES  |     | NULL    |       |
+  | publish      | varchar(30)  | YES  |     | NULL    |       |
+  | publish_date | date         | YES  |     | NULL    |       |
+  | category_id  | char(5)      | YES  |     | NULL    |       |
+  | rating       | char(1)      | NO   |     | B       |       |
+  | pages        | int(11)      | NO   |     | 0       |       |
+  +--------------+--------------+------+-----+---------+-------+
+

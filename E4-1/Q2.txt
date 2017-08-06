@@ -1,0 +1,56 @@
+問２：
+
+  注文明細テーブル(order_desc)を新規に作成して見ましょう。
+  以下の空欄を埋めて、SQL命令を完成させてください。
+
+  (①)
+    order_desc
+    (
+      po_id INT NOT NULL,
+      p_id CHAR(10) NOT NULL,
+      (②),
+      (③) (po_id, p_id)
+    )
+  ;
+
+  ※フィールド仕様
+  +----------+----------+------+-----+---------+-------+
+  | Field    | Type     | Null | Key | Default | Extra |
+  +----------+----------+------+-----+---------+-------+
+  | po_id    | int(11)  | NO   | PRI | 0       |       |
+  | p_id     | char(10) | NO   | PRI |         |       |
+  | quantity | int(11)  | YES  |     | NULL    |       |
+  +----------+----------+------+-----+---------+-------+
+
+
+
+回答：
+
+  ①：CREATE TABLE
+  ②：quantity CHAR(10) NULL
+  ③：PRIMARY KEY (po_id, p_id)
+
+
+結果：
+
+  CREATE TABLE                    -- 注文明細テーブルを作成します
+    order_desc                    -- テーブル名を指定します
+    (
+      po_id INT DEFAULT 0,        -- 注文番号フィールドを指定します
+      p_id CHAR(10) DEFAULT '',   -- 商品コードフィールドを指定します
+      quantity CHAR(10) NULL,     -- 購入数フィールドを指定します
+      PRIMARY KEY (po_id, p_id)   -- 注文番号、商品コードを複合キーとして設定します
+    )
+  ;
+
+  +----------+----------+------+-----+---------+-------+
+  | Field    | Type     | Null | Key | Default | Extra |
+  +----------+----------+------+-----+---------+-------+
+  | po_id    | int(11)  | NO   | PRI | 0       |       |
+  | p_id     | char(10) | NO   | PRI |         |       |
+  | quantity | char(10) | YES  |     | NULL    |       |
+  +----------+----------+------+-----+---------+-------+
+
+
+
+
