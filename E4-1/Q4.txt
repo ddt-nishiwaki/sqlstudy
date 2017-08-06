@@ -1,0 +1,44 @@
+問４：
+
+  書籍情報テーブル(books)を新規に作成して見ましょう。
+
+  ※穴埋め問題ではない
+
+  ※フィールド仕様
+  +--------------+--------------+------+-----+---------+-------+
+  | Field        | Type         | Null | Key | Default | Extra |
+  +--------------+--------------+------+-----+---------+-------+
+  | isbn         | char(17)     | NO   | PRI |         |       |
+  | title        | varchar(255) | YES  |     | NULL    |       |
+  | price        | int(11)      | YES  |     | NULL    |       |
+  | publish      | varchar(30)  | YES  |     | NULL    |       |
+  | publish_date | date         | YES  |     | NULL    |       |
+  | category_id  | char(5)      | YES  |     | NULL    |       |
+  +--------------+--------------+------+-----+---------+-------+
+
+
+回答：
+
+  CREATE TABLE
+    books
+    (
+      isbn CHAR(17) PRIMARY KEY DEFAULT '',
+      title VARCHAR(255) NULL,
+      price INT(11) NULL,
+      publish VARCHAR(30) NULL,
+      publish_date DATE NULL,
+      category_id CHAR(5) NULL
+    )
+  ;
+
+  +--------------+--------------+------+-----+---------+-------+
+  | Field        | Type         | Null | Key | Default | Extra |
+  +--------------+--------------+------+-----+---------+-------+
+  | isbn         | char(17)     | NO   | PRI |         |       |
+  | title        | varchar(255) | YES  |     | NULL    |       |
+  | price        | int(11)      | YES  |     | NULL    |       |
+  | publish      | varchar(30)  | YES  |     | NULL    |       |
+  | publish_date | date         | YES  |     | NULL    |       |
+  | category_id  | char(5)      | YES  |     | NULL    |       |
+  +--------------+--------------+------+-----+---------+-------+
+
