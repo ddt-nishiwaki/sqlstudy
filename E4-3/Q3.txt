@@ -1,0 +1,33 @@
+問３：
+
+  書籍情報テーブル(books)の
+  category_idの後方に
+  sales列(INT型)を追加して見ましょう。
+
+  ※穴埋め問題ではない
+
+
+回答：
+
+  ALTER TABLE     -- 書籍情報テーブルの定義を変更します
+    books         -- 変更するテーブルを指定します
+  ADD             -- 追加する内容を定義します
+    sales INT     -- 売上フィールドを追加します
+  AFTER           -- 追加するための場所を指定します
+    category_id   -- カテゴリーIDの後ろに追加します
+  ;
+
+  +--------------+--------------+------+-----+---------+-------+
+  | Field        | Type         | Null | Key | Default | Extra |
+  +--------------+--------------+------+-----+---------+-------+
+  | isbn         | char(17)     | NO   | PRI |         |       |
+  | title        | varchar(255) | YES  |     | NULL    |       |
+  | price        | int(11)      | YES  |     | NULL    |       |
+  | publish      | varchar(30)  | YES  |     | NULL    |       |
+  | publish_date | date         | YES  |     | NULL    |       |
+  | category_id  | char(5)      | YES  |     | NULL    |       |
+  | sales        | int(11)      | YES  |     | NULL    |       |
+  | rating       | char(1)      | NO   |     | B       |       |
+  | pages        | int(11)      | NO   |     | 0       |       |
+  +--------------+--------------+------+-----+---------+-------+
+
