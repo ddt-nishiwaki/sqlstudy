@@ -1,0 +1,65 @@
+問５：
+
+  以下は、貸出記録テーブル(rental) を新規に作成するためのSQL命令ですが、
+  誤りが2点あります。誤りを指摘してください。
+
+  CREATE TABLE INTO
+    rental
+    (
+      id INT AUTO_INCREMENT,PRIMARY KEY,
+      user_id CHAR(7),
+      isbn CHAR(13),
+      rental_date DATE,
+      returned SMALLINT DEFAULT 0
+    )
+  ;
+
+  ※フィールド仕様
+  +-------------+-------------+------+-----+---------+----------------+
+  | Field       | Type        | Null | Key | Default | Extra          |
+  +-------------+-------------+------+-----+---------+----------------+
+  | id          | int(11)     | NO   | PRI | NULL    | auto_increment |
+  | user_id     | char(7)     | YES  |     | NULL    |                |
+  | isbn        | char(13)    | YES  |     | NULL    |                |
+  | rental_date | date        | YES  |     | NULL    |                |
+  | returned    | smallint(6) | YES  |     | 0       |                |
+  +-------------+-------------+------+-----+---------+----------------+
+
+
+回答：
+
+  CREATE TABLE INTO                         <--- INTO はいらない
+    rental
+    (
+      id INT AUTO_INCREMENT,PRIMARY KEY,    <--- AUTO_INCREMENTの後ろのカンマはいらない
+      user_id CHAR(7),
+      isbn CHAR(13),
+      rental_date DATE,
+      returned SMALLINT DEFAULT 0
+    )
+  ;
+
+
+結果：
+
+  CREATE TABLE
+    rental
+    (
+      id INT AUTO_INCREMENT PRIMARY KEY,
+      user_id CHAR(7),
+      isbn CHAR(13),
+      rental_date DATE,
+      returned SMALLINT DEFAULT 0
+    )
+  ;
+
+  +-------------+-------------+------+-----+---------+----------------+
+  | Field       | Type        | Null | Key | Default | Extra          |
+  +-------------+-------------+------+-----+---------+----------------+
+  | id          | int(11)     | NO   | PRI | NULL    | auto_increment |
+  | user_id     | char(7)     | YES  |     | NULL    |                |
+  | isbn        | char(13)    | YES  |     | NULL    |                |
+  | rental_date | date        | YES  |     | NULL    |                |
+  | returned    | smallint(6) | YES  |     | 0       |                |
+  +-------------+-------------+------+-----+---------+----------------+
+
