@@ -1,0 +1,58 @@
+問１：
+
+  著者情報テーブル(author)を新規に作成して見ましょう。
+  以下の空欄を埋めて、SQL命令を完成させてください。
+
+  CREATE TABLES
+    (①)
+    (
+      author_id CHAR(5) (②),
+      name VARCHAR(30),
+      name_kana VARCHAR(100),
+      birth (③)
+    )
+  ;
+
+  ※フィールド仕様
+  +-----------+--------------+------+-----+---------+-------+
+  | Field     | Type         | Null | Key | Default | Extra |
+  +-----------+--------------+------+-----+---------+-------+
+  | author_id | char(5)      | NO   | PRI |         |       |
+  | name      | varchar(30)  | YES  |     | NULL    |       |
+  | name_kana | varchar(100) | YES  |     | NULL    |       |
+  | birth     | date         | YES  |     | NULL    |       |
+  +-----------+--------------+------+-----+---------+-------+
+
+
+回答：
+
+  ①：author
+  ②：PRIMARY KEY NULL,
+  ③：DATE
+
+
+結果：
+
+
+
+-- 新規に著者情報テーブルを作成します
+
+  CREATE TABLE                            -- 著者情報テーブルを作成します
+    author                                -- テーブル名を指定します
+    (
+      author_id CHAR(5) PRIMARY KEY NULL, -- 主キーとして著者IDを指定します
+      name VARCHAR(30),                   -- 氏名カラムを設定します
+      name_kana VARCHAR(100),             -- 氏名(カナ)カラムを設定します
+      birth DATE                          -- 誕生日カラムを設定します
+    )
+  ;
+
+  +-----------+--------------+------+-----+---------+-------+
+  | Field     | Type         | Null | Key | Default | Extra |
+  +-----------+--------------+------+-----+---------+-------+
+  | author_id | char(5)      | NO   | PRI | NULL    |       |
+  | name      | varchar(30)  | YES  |     | NULL    |       |
+  | name_kana | varchar(100) | YES  |     | NULL    |       |
+  | birth     | date         | YES  |     | NULL    |       |
+  +-----------+--------------+------+-----+---------+-------+
+
