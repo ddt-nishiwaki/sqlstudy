@@ -1,0 +1,43 @@
+問４：
+
+  ユーザテーブル(usr)の
+  f_name_kana列の後方に
+  以下の２列を追加して見ましょう。
+
+  ・sex列 (VARCHAR(5)型、デフォルト値は男
+  ・job列 (VARCHAR(30)
+
+  ※穴埋め問題ではない
+
+
+回答：
+
+  ALTER TABLE                             -- ユーザテーブルの定義を変更します
+    usr                                   -- 変更するためにテーブルを指定します
+  ADD                                     -- 追加する定義を指定します
+    sex VARCHAR(5) DEFAULT '男' NOT NULL  -- 性別フィールドを指定します
+  AFTER                                   -- 追加するための場所を指定します
+    f_name_kana,                          -- 名(カナ)の後ろに追加します
+  ADD                                     -- 追加する定義を指定します
+    job VARCHAR(30) NULL                  -- 職業フィールドを追加します
+  AFTER                                   -- 追加するための場所を指定します
+    f_name_kana                           -- 名(カナ)の後ろに追加します
+  ;
+
+  +-------------+--------------+------+-----+---------+-------+
+  | Field       | Type         | Null | Key | Default | Extra |
+  +-------------+--------------+------+-----+---------+-------+
+  | user_id     | char(7)      | NO   | PRI |         |       |
+  | l_name      | varchar(20)  | YES  |     | NULL    |       |
+  | f_name      | varchar(20)  | YES  |     | NULL    |       |
+  | l_name_kana | varchar(100) | YES  |     | NULL    |       |
+  | f_name_kana | varchar(100) | YES  |     | NULL    |       |
+  | job         | varchar(30)  | YES  |     | NULL    |       |
+  | sex         | varchar(5)   | NO   |     | 男      |       |
+  | prefecture  | varchar(15)  | YES  | MUL | NULL    |       |
+  | city        | varchar(20)  | YES  |     | NULL    |       |
+  | o_address   | varchar(100) | YES  |     | NULL    |       |
+  | tel         | varchar(20)  | YES  |     | NULL    |       |
+  | email       | varchar(255) | YES  |     | NULL    |       |
+  +-------------+--------------+------+-----+---------+-------
+

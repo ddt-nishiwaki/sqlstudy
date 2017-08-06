@@ -1,0 +1,54 @@
+問５：
+
+  以下は、社員テーブル(employee)の
+  depart_id列の後方に
+  「email列 (VARCHAR(255)型」を追加するSQL命令ですが
+  ２点誤りがあります。誤りを指摘してください。
+
+  ALTER TABLE
+    employee
+  ADD TO
+    email VARCHAR(255) NOT NULL
+  BEFORE
+    depart_id
+  ;
+
+
+回答：
+
+  ALTER TABLE
+    employee
+  ADD TO                           <--- TO はいらない
+    email VARCHAR(255) NOT NULL
+  BEFORE                           <--- 後方に追加するには AFTER を使う
+    depart_id
+  ;
+
+
+結果：
+
+  ALTER TABLE                    -- 社員テーブルの定義を変更します
+    employee                     -- 変更するためにテーブルを指定します
+  ADD                            -- 追加する定義を指定します
+    email VARCHAR(255) NOT NULL  -- メールアドレスフィールドを追加します
+  AFTER                          -- 追加するための場所を指定します
+    depart_id                    -- 部署フィールドの後ろに追加します
+  ;
+
+  +-------------+--------------+------+-----+---------+-------+
+  | Field       | Type         | Null | Key | Default | Extra |
+  +-------------+--------------+------+-----+---------+-------+
+  | s_id        | char(7)      | NO   | PRI |         |       |
+  | l_name      | varchar(20)  | YES  |     | NULL    |       |
+  | f_name      | varchar(20)  | YES  |     | NULL    |       |
+  | l_name_kana | varchar(100) | YES  |     | NULL    |       |
+  | f_name_kana | varchar(100) | YES  |     | NULL    |       |
+  | sex         | smallint(6)  | YES  |     | NULL    |       |
+  | class       | varchar(20)  | YES  |     | NULL    |       |
+  | depart_id   | char(3)      | YES  |     | NULL    |       |
+  | email       | varchar(255) | NO   |     | NULL    |       |
+  | b_id        | char(7)      | YES  |     | NULL    |       |
+  | last_update | date         | YES  |     | NULL    |       |
+  | retired     | smallint(6)  | YES  |     | NULL    |       |
+  +-------------+--------------+------+-----+---------+-------+
+
