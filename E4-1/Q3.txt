@@ -1,0 +1,49 @@
+問３：
+
+  月間売上テーブル(sales)を新規に生成して見ましょう。
+
+  ※穴埋め問題ではない
+
+  ※フィールド仕様
+  +---------+---------+------+-----+---------+-------+
+  | Field   | Type    | Null | Key | Default | Extra |
+  +---------+---------+------+-----+---------+-------+
+  | s_id    | char(5) | NO   | PRI |         |       |
+  | s_date  | char(7) | NO   | PRI | 0000-00 |       |
+  | s_value | int(11) | YES  |     | NULL    |       |
+  +---------+---------+------+-----+---------+-------+
+
+
+回答：
+
+  CREATE TABLE
+    sales
+    (
+      s_id CHAR(5) DEFAULT '',
+      s_date CHAR(7) DEFAULT '0000-00',
+      s_value INT(11) NULL,
+      PRIMARY KEY (s_id, s_date)
+    )
+  ;
+
+
+結果：
+
+  CREATE TABLE                          -- 月間売上テーブルを作成します
+    sales                               -- テーブル名を指定します
+    (
+      s_id CHAR(5) DEFAULT '',          -- 店舗コードフィールドを指定します
+      s_date CHAR(7) DEFAULT '0000-00', -- 売上対象年月フィールドを指定します
+      s_value INT(11) NULL,             -- 売上高(千円)フィールドを指定します
+      PRIMARY KEY (s_id, s_date)        -- 複合キーを指定します
+    )
+  ;
+
+  +---------+---------+------+-----+---------+-------+
+  | Field   | Type    | Null | Key | Default | Extra |
+  +---------+---------+------+-----+---------+-------+
+  | s_id    | char(5) | NO   | PRI |         |       |
+  | s_date  | char(7) | NO   | PRI | 0000-00 |       |
+  | s_value | int(11) | YES  |     | NULL    |       |
+  +---------+---------+------+-----+---------+-------+
+
